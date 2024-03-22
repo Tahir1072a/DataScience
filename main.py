@@ -28,6 +28,7 @@ if __name__ == '__main__':
     # Merkezi Eğilim ve Merkezi Dağılım hesaplamalarını yapan kendi yazdığım sınıf/mini kütüphane.
     calculate = Calculations()
     register = [[], [], []]
+    mod_list = []
 
     # Tkinter penceresini oluşturun
     root = tk.Tk()
@@ -68,8 +69,7 @@ if __name__ == '__main__':
 
         register[i].append(art_ort)
         register[i].append(medyan)
-        # Hocaya sor.
-        register[i].append(mods[0])
+        mod_list.append(mods)
         register[i].append(arr_range)
         register[i].append(mutlak_sapma)
         register[i].append(varyans)
@@ -88,8 +88,10 @@ if __name__ == '__main__':
         print(f"{data.name} IQR : {IQR}")
         print("----------------------------------------------------------------")
 
-    df = pd.DataFrame(np.array(register), columns=["Art Ort", "Medyan", "Mods", "Range", "Mutlak Sapma",
+    df = pd.DataFrame(np.array(register), columns=["Art Ort", "Medyan", "Range", "Mutlak Sapma",
                                                    "Varyans", "Standart Sapma", "Değişim Katsayısı", "IQR"])
+    df["Mods"] = mod_list
     df.to_excel("sonuc.xlsx")
+
     print("Verileriniz başarıyla sonuc.xlsx dosyasına kaydedilmiştir.")
     input("Çıkmak için herhangi bir tuşa basın")
